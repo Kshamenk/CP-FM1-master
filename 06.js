@@ -26,17 +26,37 @@ const { BinarySearchTree } = require("./DS");
 
 BinarySearchTree.prototype.searchMaxTwo = function () {
   // tu código acá:
-  var resultado = [];
-  if (!this.root) {
-    return resultado;
+  // var resultado = [];
+  // if (!this.root) {
+  //   return resultado;
+  // }
+  // var curr = this.root;
+  // while (curr) {
+  //   resultado.push(curr.value);
+  //   curr = curr.right;
+  // }
+  // return resultado;
+  var max1 = this.value
+  var max2 = this.value
+  var curr = this
+  var array = []
+  function recorrer(curr){
+    if (curr.left) {                                // caso de recursion
+      recorrer(curr.left)
+    }
+    array.push(curr.value)
+    if (curr.right) {
+      recorrer(curr.right)
+    }
   }
-  var curr = this.root;
-  while (curr) {
-    resultado.push(curr.value);
-    curr = curr.right;
+  recorrer(curr)
+  for (let i = 0; i < array.length; i++) {
+    if (array[i]> max1) {
+      max1 = array[i]
+      max2 = array[i - 1]
+    }
   }
-  return resultado;
-
+  return [max1, max2]
 };
 
 // No modifiques nada debajo de esta linea //

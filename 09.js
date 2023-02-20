@@ -41,9 +41,25 @@ const { BinarySearchTree } = require("./DS");
 
 BinarySearchTree.prototype.insertWord = function (palabra) {
 // Tu código acá
+if (palabra === "") return false          //facil, si no hay nada que retorne falso
+
+    function insert(node, palabra) {          //como dice la funcion insert recibe como parametro el nodo y la palabra
+        if (palabra.length < node.value.length) {    //digo que cuando el largo de la palabra sea menos al largo del valor del nodo
+            if (node.left) return insert(node.left, palabra)  //si hay nodo a la izq retorname la funcion con esos parametros
+            node.left = new BinarySearchTree(palabra)         //el nodo izq se vuelve una nueva instancia de nuestro arbol binario 
+        } else if (palabra.length > node.value.length) {          //si es mayor el elemento palabra repetimos lo mismo para su nodo derecho
+            if (node.right) return insert(node.right, palabra)
+            node.right = new BinarySearchTree(palabra)      
+        } else {
+            return false                 //si es que  la palabra es un string vacío, entonces se retorna false
+        }
+        return palabra              
+    }
+    return insert(this, palabra)    // se llama a la funcion. this hace referencia al objeto que llama la funcion, como segundo, la palabra que vamos a agregar
+}
 
 
-};
+
 
 //⚠️ NO MODIFICAR NADA POR DEBAJO DE ESTA LÍNEA ⚠️
 module.exports = { BinarySearchTree };

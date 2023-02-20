@@ -20,8 +20,36 @@
     
   function countDeep(arr) {
   // Tu código aca:
+ //  primero defino las variables de lo que me voy a encotrar asi guardo cada cosa donde corresponde
+  // Tu código aca:
+  var numeros = 0 // una por cada tipo de elemento
+  var strings = 0
+  var booleanos = 0
+  var indefinidos = 0
+  var arreglos = 0
 
-} 
+  function count(elem) {
+    // llamo a la funcion count y como parametro le paso su elemento
+    if (Array.isArray(elem)) {
+      // utilizo el metodo arrayisarray para saber si dentro de elementos hay arreglos
+      arreglos++
+      elem.forEach(count); // utilizando un ForEach cuento el total de elementos
+    } else if (typeof elem === "number") {
+      //y digo en todos los casos si el tipo de elemento es igual al caso que me interese comparar
+      numeros++
+    } else if (typeof elem === "string") {
+      strings++
+    } else if (typeof elem === "boolean") {
+      booleanos++
+    } else if (typeof elem === "undefined") {
+      indefinidos++
+    }
+  }
+
+  count(arr); //llamo a la funcion y la ejecuto NO TE OLVIDES DE EJECUTAR LAS FUNCIONS WN CTM
+  return Math.pow(((arreglos - numeros) * strings) / booleanos, indefinidos); //aca esto lo busque, si sabia que necesitaba usar un Math pero no se me ocurria como
+}
+
 // No modifiques nada debajo de esta linea //
 
 module.exports = countDeep
